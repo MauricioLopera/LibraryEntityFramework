@@ -1,5 +1,5 @@
 # LibraryEntityFramework
-A little project created with C#, EntityFramewor 6 and ASP.Net Web Forms.
+A little project created with C#, EntityFramework 6 and ASP.Net Web Forms.
 
 Requirements:
 1. Visual Studio 2019 whith latest updates (.NET 5, EntityFramework 6 and C# 9.0).
