@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DesafioMLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Autores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecreg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Libros_por_Autor" Relationship="Self.FK_Libros_por_Autor_Autores" FromRole="Autores" ToRole="Libros_por_Autor" />
+  </EntityType>
+  <EntityType Name="Editoriales">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecreg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Libros" Relationship="Self.FK_Libros_Editoriales" FromRole="Editoriales" ToRole="Libros" />
+  </EntityType>
+  <EntityType Name="EventLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="proceso" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Libros">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="editorialID" Type="Int64" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sinopsis" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="publicacion" Type="Int32" Nullable="false" />
+    <Property Name="fecreg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Editoriales" Relationship="Self.FK_Libros_Editoriales" FromRole="Libros" ToRole="Editoriales" />
+    <NavigationProperty Name="Libros_por_Autor" Relationship="Self.FK_Libros_por_Autor_Libros" FromRole="Libros" ToRole="Libros_por_Autor" />
+  </EntityType>
+  <EntityType Name="Libros_por_Autor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="autorID" Type="Int64" Nullable="false" />
+    <Property Name="libroID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Autores" Relationship="Self.FK_Libros_por_Autor_Autores" FromRole="Libros_por_Autor" ToRole="Autores" />
+    <NavigationProperty Name="Libros" Relationship="Self.FK_Libros_por_Autor_Libros" FromRole="Libros_por_Autor" ToRole="Libros" />
+  </EntityType>
+  <EntityType Name="V_autores_libros">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="Autor" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Autor" Type="String" MaxLength="401" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="V_listaLibros">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="Titulo" />
+      <PropertyRef Name="Publicado" />
+      <PropertyRef Name="Editorial" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="sinopsis" />
+      <PropertyRef Name="editorialID" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publicado" Type="Int32" Nullable="false" />
+    <Property Name="Editorial" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sinopsis" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="editorialID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Libros_por_Autor_Autores">
+    <End Role="Autores" Type="Self.Autores" Multiplicity="1" />
+    <End Role="Libros_por_Autor" Type="Self.Libros_por_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros_por_Autor">
+        <PropertyRef Name="autorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libros_Editoriales">
+    <End Role="Editoriales" Type="Self.Editoriales" Multiplicity="1" />
+    <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Editoriales">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros">
+        <PropertyRef Name="editorialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libros_por_Autor_Libros">
+    <End Role="Libros" Type="Self.Libros" Multiplicity="1" />
+    <End Role="Libros_por_Autor" Type="Self.Libros_por_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libros">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros_por_Autor">
+        <PropertyRef Name="libroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DesafioMLEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autores" EntityType="Self.Autores" />
+    <EntitySet Name="Editoriales" EntityType="Self.Editoriales" />
+    <EntitySet Name="EventLog" EntityType="Self.EventLog" />
+    <EntitySet Name="Libros" EntityType="Self.Libros" />
+    <EntitySet Name="Libros_por_Autor" EntityType="Self.Libros_por_Autor" />
+    <EntitySet Name="V_autores_libros" EntityType="Self.V_autores_libros" />
+    <EntitySet Name="V_listaLibros" EntityType="Self.V_listaLibros" />
+    <AssociationSet Name="FK_Libros_por_Autor_Autores" Association="Self.FK_Libros_por_Autor_Autores">
+      <End Role="Autores" EntitySet="Autores" />
+      <End Role="Libros_por_Autor" EntitySet="Libros_por_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libros_Editoriales" Association="Self.FK_Libros_Editoriales">
+      <End Role="Editoriales" EntitySet="Editoriales" />
+      <End Role="Libros" EntitySet="Libros" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libros_por_Autor_Libros" Association="Self.FK_Libros_por_Autor_Libros">
+      <End Role="Libros" EntitySet="Libros" />
+      <End Role="Libros_por_Autor" EntitySet="Libros_por_Autor" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Autores_INUP">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="nombres" Mode="In" Type="String" />
+      <Parameter Name="apellidos" Mode="In" Type="String" />
+      <Parameter Name="fecreg" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Editoriales_INUP">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="ciudad" Mode="In" Type="String" />
+      <Parameter Name="fecreg" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_EventLog_IN">
+      <Parameter Name="proceso" Mode="In" Type="String" />
+      <Parameter Name="descripcion" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Libros_INUP">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="titulo" Mode="In" Type="String" />
+      <Parameter Name="sinopsis" Mode="In" Type="String" />
+      <Parameter Name="añopub" Mode="In" Type="Int32" />
+      <Parameter Name="editorialID" Mode="In" Type="Int64" />
+      <Parameter Name="fecreg" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_LibrosxAutor_INDEL">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="AutorID" Mode="In" Type="Int64" />
+      <Parameter Name="LibroID" Mode="In" Type="Int64" />
+      <Parameter Name="fecreg" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

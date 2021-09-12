@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DesafioMLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombres" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="apellidos" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fecreg" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Editoriales">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ciudad" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecreg" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="proceso" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="fecha" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Libros">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="editorialID" Type="bigint" Nullable="false" />
+    <Property Name="titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sinopsis" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="publicacion" Type="int" Nullable="false" />
+    <Property Name="fecreg" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Libros_por_Autor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="autorID" Type="bigint" Nullable="false" />
+    <Property Name="libroID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DesafioML.dbo.V_autores_libros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_autores_libros">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="Autor" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Autor" Type="nvarchar" MaxLength="401" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DesafioML.dbo.V_listaLibros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_listaLibros">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="Publicado" />
+      <PropertyRef Name="Editorial" />
+      <PropertyRef Name="sinopsis" />
+      <PropertyRef Name="editorialID" />
+    </Key>
+    <Property Name="id" Type="bigint" Nullable="false" />
+    <Property Name="titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Publicado" Type="int" Nullable="false" />
+    <Property Name="Editorial" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sinopsis" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="editorialID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Libros_Editoriales">
+    <End Role="Editoriales" Type="Self.Editoriales" Multiplicity="1" />
+    <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Editoriales">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros">
+        <PropertyRef Name="editorialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libros_por_Autor_Autores">
+    <End Role="Autores" Type="Self.Autores" Multiplicity="1" />
+    <End Role="Libros_por_Autor" Type="Self.Libros_por_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros_por_Autor">
+        <PropertyRef Name="autorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libros_por_Autor_Libros">
+    <End Role="Libros" Type="Self.Libros" Multiplicity="1" />
+    <End Role="Libros_por_Autor" Type="Self.Libros_por_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libros">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Libros_por_Autor">
+        <PropertyRef Name="libroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_Autores_INUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="nombres" Type="nvarchar" Mode="In" />
+    <Parameter Name="apellidos" Type="nvarchar" Mode="In" />
+    <Parameter Name="fecreg" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_Editoriales_INUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="ciudad" Type="nvarchar" Mode="In" />
+    <Parameter Name="fecreg" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_EventLog_IN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="proceso" Type="nvarchar" Mode="In" />
+    <Parameter Name="descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="fecha" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_Libros_INUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="titulo" Type="nvarchar" Mode="In" />
+    <Parameter Name="sinopsis" Type="nvarchar" Mode="In" />
+    <Parameter Name="añopub" Type="int" Mode="In" />
+    <Parameter Name="editorialID" Type="bigint" Mode="In" />
+    <Parameter Name="fecreg" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_LibrosxAutor_INDEL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="AutorID" Type="bigint" Mode="In" />
+    <Parameter Name="LibroID" Type="bigint" Mode="In" />
+    <Parameter Name="fecreg" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="DesafioMLModelStoreContainer">
+    <EntitySet Name="Autores" EntityType="Self.Autores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Editoriales" EntityType="Self.Editoriales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventLog" EntityType="Self.EventLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Libros" EntityType="Self.Libros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Libros_por_Autor" EntityType="Self.Libros_por_Autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="V_autores_libros" EntityType="Self.V_autores_libros" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_autores_libros].[id] AS [id], 
+    [V_autores_libros].[titulo] AS [titulo], 
+    [V_autores_libros].[Autor] AS [Autor]
+    FROM [dbo].[V_autores_libros] AS [V_autores_libros]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_listaLibros" EntityType="Self.V_listaLibros" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_listaLibros].[id] AS [id], 
+    [V_listaLibros].[titulo] AS [titulo], 
+    [V_listaLibros].[Publicado] AS [Publicado], 
+    [V_listaLibros].[Editorial] AS [Editorial], 
+    [V_listaLibros].[sinopsis] AS [sinopsis], 
+    [V_listaLibros].[editorialID] AS [editorialID]
+    FROM [dbo].[V_listaLibros] AS [V_listaLibros]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Libros_Editoriales" Association="Self.FK_Libros_Editoriales">
+      <End Role="Editoriales" EntitySet="Editoriales" />
+      <End Role="Libros" EntitySet="Libros" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libros_por_Autor_Autores" Association="Self.FK_Libros_por_Autor_Autores">
+      <End Role="Autores" EntitySet="Autores" />
+      <End Role="Libros_por_Autor" EntitySet="Libros_por_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libros_por_Autor_Libros" Association="Self.FK_Libros_por_Autor_Libros">
+      <End Role="Libros" EntitySet="Libros" />
+      <End Role="Libros_por_Autor" EntitySet="Libros_por_Autor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

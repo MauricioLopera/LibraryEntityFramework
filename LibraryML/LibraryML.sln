@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryML", "LibraryML.csproj", "{F05C11C7-5E88-4AA5-926B-2C28AB2AC63E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryML.Tests", "..\LibraryML.Tests\LibraryML.Tests.csproj", "{E84E6B8C-19EE-4D41-8E72-CEFAB779F614}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F05C11C7-5E88-4AA5-926B-2C28AB2AC63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05C11C7-5E88-4AA5-926B-2C28AB2AC63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05C11C7-5E88-4AA5-926B-2C28AB2AC63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05C11C7-5E88-4AA5-926B-2C28AB2AC63E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E84E6B8C-19EE-4D41-8E72-CEFAB779F614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E84E6B8C-19EE-4D41-8E72-CEFAB779F614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E84E6B8C-19EE-4D41-8E72-CEFAB779F614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E84E6B8C-19EE-4D41-8E72-CEFAB779F614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55697594-B8FD-49E7-ACE5-960738249D05}
+	EndGlobalSection
+EndGlobal

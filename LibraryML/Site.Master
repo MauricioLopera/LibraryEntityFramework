@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LibraryML.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="Styles/app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body class="blue lighten-5">
+    <form runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+
+        <div class="container white">
+            <header>
+                <nav class="blue darken-1">
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo">LibreriaML</a>
+                        <ul class="right">
+                            <li><a href="Default.aspx">Libros</a></li>
+                            <li><a href="BDAutores.aspx">Autores</a></li>
+                            <li><a href="BDEditoriales.aspx">Editoriales</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <main>
+                <div class="row">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </main>
+            <footer class="center-align">
+                <p>Desarrollado por Mauricio Lopera Rivera</p>
+            </footer>
+        </div>
+        
+
+    </form>
+
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="Scripts/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿body {
+    font-family: 'Nunito', sans-serif;
+    font-size:18px;
+    margin: 5vh;
+    padding:0;
+}
+
+/*Master Styles*/
+.brand-logo{
+    padding-left: 10px !important;
+}
+
+/*Default Styles*/
+.rowtit{
+    padding:20px 10px;
+}
+h4 {
+    font-size: 2rem;
+    color: #0d47a1;
+    margin:0;
+}
+.lbltitgrid {
+    font-weight:bold;
+    display: inline-block;
+    vertical-align: middle;
+    color: #000000;
+}
+.lblcuerpo {
+    display: inline-block;
+    vertical-align: middle;
+    color: #000000;
+}
+.colsinpad {
+    padding: 0 !important;
+}
+.rowsinmag {
+    margin: 0 !important;
+}
+.rowconmag{
+    margin: 10px 0 !important;
+}
+.rowconpad {
+    padding: 10px 0 !important;
+}
+.gridnopad tr {
+    white-space: normal !important;
+}
+.gridnopad td {
+    padding: 0;
+}
+.rowhover:hover {
+    background-color: #e0e0e0 !important;
+}
+.hlfunccards {
+    display: inline-block;
+    color: #616161 !important;
+}
+.hlfunccards i:hover {
+        color: #BF0085 !important
+    }
+.ulplanner {
+    margin: 0;
+}
+.btnnovisible {
+    display: none;
+}
+.txtsinopsis{
+    height: 130px !important;
+}
+.dropdown-content li > span{
+    color:#000000 !important;
+}
+.lnkclean{
+    color:#000000;
+    margin-right:5px;
+}
+.subtdet{
+    font-weight:bold;
+}
+.detsinop{
+    text-align:justify;
+}
+footer{
+    padding:10px 0;
+}
+footer p{
+    font-size:0.8rem;
+    color:#616161;
+}

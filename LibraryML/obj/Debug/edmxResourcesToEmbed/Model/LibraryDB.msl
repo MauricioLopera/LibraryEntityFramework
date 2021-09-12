@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DesafioMLModelStoreContainer" CdmEntityContainer="DesafioMLEntities">
+    <EntitySetMapping Name="Autores">
+      <EntityTypeMapping TypeName="DesafioMLModel.Autores">
+        <MappingFragment StoreEntitySet="Autores">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="fecreg" ColumnName="fecreg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Editoriales">
+      <EntityTypeMapping TypeName="DesafioMLModel.Editoriales">
+        <MappingFragment StoreEntitySet="Editoriales">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="fecreg" ColumnName="fecreg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventLog">
+      <EntityTypeMapping TypeName="DesafioMLModel.EventLog">
+        <MappingFragment StoreEntitySet="EventLog">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="proceso" ColumnName="proceso" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Libros">
+      <EntityTypeMapping TypeName="DesafioMLModel.Libros">
+        <MappingFragment StoreEntitySet="Libros">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="editorialID" ColumnName="editorialID" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="sinopsis" ColumnName="sinopsis" />
+          <ScalarProperty Name="publicacion" ColumnName="publicacion" />
+          <ScalarProperty Name="fecreg" ColumnName="fecreg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Libros_por_Autor">
+      <EntityTypeMapping TypeName="DesafioMLModel.Libros_por_Autor">
+        <MappingFragment StoreEntitySet="Libros_por_Autor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="autorID" ColumnName="autorID" />
+          <ScalarProperty Name="libroID" ColumnName="libroID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_autores_libros">
+      <EntityTypeMapping TypeName="DesafioMLModel.V_autores_libros">
+        <MappingFragment StoreEntitySet="V_autores_libros">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="Autor" ColumnName="Autor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_listaLibros">
+      <EntityTypeMapping TypeName="DesafioMLModel.V_listaLibros">
+        <MappingFragment StoreEntitySet="V_listaLibros">
+          <ScalarProperty Name="Titulo" ColumnName="titulo" />
+          <ScalarProperty Name="editorialID" ColumnName="editorialID" />
+          <ScalarProperty Name="sinopsis" ColumnName="sinopsis" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Publicado" ColumnName="Publicado" />
+          <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+        </MappingFragment>
+        <MappingFragment StoreEntitySet="Libros">
+          <ScalarProperty Name="Titulo" ColumnName="titulo" />
+          <ScalarProperty Name="sinopsis" ColumnName="sinopsis" />
+          <ScalarProperty Name="editorialID" ColumnName="editorialID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+        <MappingFragment StoreEntitySet="Editoriales">
+          <ScalarProperty Name="Editorial" ColumnName="nombre" />
+          <ScalarProperty Name="editorialID" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Autores_INUP" FunctionName="DesafioMLModel.Store.SP_Autores_INUP" />
+    <FunctionImportMapping FunctionImportName="SP_Editoriales_INUP" FunctionName="DesafioMLModel.Store.SP_Editoriales_INUP" />
+    <FunctionImportMapping FunctionImportName="SP_EventLog_IN" FunctionName="DesafioMLModel.Store.SP_EventLog_IN" />
+    <FunctionImportMapping FunctionImportName="SP_Libros_INUP" FunctionName="DesafioMLModel.Store.SP_Libros_INUP" />
+    <FunctionImportMapping FunctionImportName="SP_LibrosxAutor_INDEL" FunctionName="DesafioMLModel.Store.SP_LibrosxAutor_INDEL" />
+  </EntityContainerMapping>
+</Mapping>
